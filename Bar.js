@@ -25,6 +25,7 @@ export default class ProgressBar extends Component {
     useNativeDriver: PropTypes.bool,
     animationConfig: PropTypes.object,
     animationType: PropTypes.oneOf(['decay', 'timing', 'spring']),
+    strokeCap: PropTypes.oneOf(['butt', 'round']),
   };
 
   static defaultProps = {
@@ -40,6 +41,7 @@ export default class ProgressBar extends Component {
     useNativeDriver: false,
     animationConfig: { bounciness: 0 },
     animationType: 'spring',
+    strokeCap: 'butt',
   };
 
   constructor(props) {
@@ -127,6 +129,7 @@ export default class ProgressBar extends Component {
       style,
       unfilledColor,
       width,
+      strokeCap,
       ...restProps
     } = this.props;
 
@@ -142,6 +145,7 @@ export default class ProgressBar extends Component {
     const progressStyle = {
       backgroundColor: color,
       height,
+      borderRadius: strokeCap === 'circle' ? borderRadius : 0,
       transform: [
         {
           translateX: this.state.animationValue.interpolate({

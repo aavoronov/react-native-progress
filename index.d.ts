@@ -53,7 +53,7 @@ declare module 'react-native-progress' {
      * @memberof DefaultPropTypes
      * @default rgba(0, 122, 255, 1)
      */
-     color?: string;
+    color?: string;
 
     /**
      * Color of the remaining progress.
@@ -144,6 +144,15 @@ declare module 'react-native-progress' {
      * @default spring
      */
     animationType?: 'decay' | 'timing' | 'spring';
+
+    /**
+     * Determines whether the inner progress bar should be rounded
+     *
+     * @type {('butt' | 'round')}
+     * @memberof BarPropTypes
+     * @default butt
+     */
+    strokeCap?: 'butt' | 'round';
   }
 
   /**
@@ -241,8 +250,8 @@ declare module 'react-native-progress' {
      * @memberof CirclePropTypes
      * @default 0.9
      */
-     endAngle?: number;
-    }
+    endAngle?: number;
+  }
 
   /**
    * Properties for `PiePropTypes` components
@@ -261,7 +270,7 @@ declare module 'react-native-progress' {
      */
     size?: number;
   }
-  
+
   /**
    * Properties for `CircleSnailPropTypes` components
    *
@@ -269,7 +278,8 @@ declare module 'react-native-progress' {
    * @interface CircleSnailPropTypes
    * @extends {DefaultPropTypes}
    */
-  export interface CircleSnailPropTypes extends Omit<DefaultPropTypes, 'color'> {
+  export interface CircleSnailPropTypes
+    extends Omit<DefaultPropTypes, 'color'> {
     /**
      * If the circle should animate.
      *
