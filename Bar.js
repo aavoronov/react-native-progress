@@ -143,19 +143,14 @@ export default class ProgressBar extends Component {
       backgroundColor: unfilledColor,
     };
 
-    const inputRange = [0, 1];
-    const outputRange = [0.001, 1];
-
-    const animatedWidth = this.state.animationValue.interpolate({
-      inputRange,
-      outputRange,
-    });
-
     const progressStyle = {
       backgroundColor: color,
       height,
-      width: animatedWidth,
-      borderRadius: strokeCap === 'circle' ? borderRadius : 0,
+      width: this.state.progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, this.state.width],
+      }),
+      borderRadius: strokeCap === 'round' ? height : 0,
       transform: [
         {
           translateX: this.state.animationValue.interpolate({
@@ -163,12 +158,12 @@ export default class ProgressBar extends Component {
             outputRange: [innerWidth * -INDETERMINATE_WIDTH_FACTOR, innerWidth],
           }),
         },
-        {
-          translateX: this.state.progress.interpolate({
-            inputRange: [0, 1],
-            outputRange: [innerWidth / (I18nManager.isRTL ? 2 : -2), 0],
-          }),
-        },
+        // {
+        //   translateX: this.state.progress.interpolate({
+        //     inputRange: [0, 1],
+        //     outputRange: [innerWidth / (I18nManager.isRTL ? 2 : -2), 0],
+        //   }),
+        // },
         // {
         //   // Interpolation a temp workaround for https://github.com/facebook/react-native/issues/6278
         //   scaleX: this.state.progress.interpolate({
